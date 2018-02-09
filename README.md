@@ -18,3 +18,5 @@ eg
 ```
 <img src="ouimage.jpg" data-hubpid="thedailytelegraph" data-hubaid="telcopy001" data-hubidt="telegraph_id">
 ```
+
+You can see a few examples [here](http://www.copyrighthub.org/full-house-for-barcelona-workshop/)
