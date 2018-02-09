@@ -1,6 +1,6 @@
 # eCopyright-Symbol
 
-Add the eCopyright Symbol to images in you pages by including this in the <head> of your page
+Add the eCopyright Symbol to images in your pages by including this in the `<head>` of your html page
 
 ```
 <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
