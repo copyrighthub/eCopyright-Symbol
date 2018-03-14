@@ -8,7 +8,7 @@ function eCopyrightSymbol(link, image) {
     $(eCopyright).insertAfter($(image));
 }
 
-// find all images on page and look for hub key of copyright hub data attributes
+// find all images on page and look for hub key or copyright hub data attributes
 $(function() {
     // we're going to push images into the page so just get the images there at the start
     images = $("img");
