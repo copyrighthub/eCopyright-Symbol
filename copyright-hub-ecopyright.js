@@ -6,7 +6,7 @@ const hubKeyS1 = /https:\/\/((?:[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-
 
 // function to put the eCopyright symbol on top of image
 function eCopyrightSymbol(link, image) {
-    eCopyright = '<br/><a href="'+link+'" target="_blank" style="float:left"><img style="position: relative; top: -44px; left: 5px; background:rgba(256, 256, 256, 0.75);box-shadow:0 0 5px 5px rgba(256, 256, 256, 0.75)" height=32 width=32 src=//gateway.copyrighthub.org/copyrighthubcog32.png /></a>';
+    let eCopyright = '<br/><a href="'+link+'" target="_blank" style="float:left"><img style="position: relative; top: -44px; left: 5px; background:rgba(256, 256, 256, 0.75);box-shadow:0 0 5px 5px rgba(256, 256, 256, 0.75)" height=32 width=32 src=//gateway.copyrighthub.org/copyrighthubcog32.png /></a>';
     $(eCopyright).insertAfter($(image));
 }
 
