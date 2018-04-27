@@ -3,7 +3,7 @@
 // Regular experessions to match s0 and s1 hubKeys
 const hubKeyS0 = /https:\/\/((?:[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])(?:\.(?:[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]))*(?::[0-9]{2,5})?)\/(s0)\/((?:[a-zA-Z0-9\\.\\-_~!$&\\'()*+,;=:@]|%[\\da-fA-F]{2})+)\/(asset|offer|creation)\/((?:[a-zA-Z0-9\.\-_~!$&\'()*+,;=:@]|%[\da-fA-F]{2})+)\/((?:[a-zA-Z0-9\.\-_~!$&\'()*+,;=:@]|%[\da-fA-F]{2})+)\/((?:[a-zA-Z0-9\.\-_~!$&\'()*+,;=:@]|%[\da-fA-F]{2})+)/;
 const hubKeyS1 = /https:\/\/((?:[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])(?:\.(?:[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]))*(?::[0-9]{2,5})?)\/(s1)\/((?:[a-zA-Z0-9\\.\\-_~!$&\\'()*+,;=:@]|%[\\da-fA-F]{2})+)\/([0-9a-f]{32})\/(asset|offer|agreement)\/([0-9a-f]{32})/;
-
+const provider = /hubpid=[a-zA-z0-9\-]*/ 
 // function to put the eCopyright symbol on top of image
 function eCopyrightSymbol(link, image) {
     let eCopyright = '<br/><a href="'+link+'" target="_blank" style="float:left"><img style="position: relative; top: -44px; left: 5px; background:rgba(256, 256, 256, 0.75);box-shadow:0 0 5px 5px rgba(256, 256, 256, 0.75)" height=32 width=32 src=//gateway.copyrighthub.org/copyrighthubcog32.png /></a>';
@@ -36,7 +36,7 @@ $(function() {
  * cross-site content.
  * @param {string} url - image url
  * @param {function} callback
- */
+ */20591
 function getImage(url, callback) {
     if (url.indexOf('http') === 0) {
         var http = new XMLHttpRequest();
@@ -80,6 +80,13 @@ function getHubKey(data) {
         if (!matched) {
             matched = hubKeyS0.exec(value);
         }
+        if (!matched){
+            matched = provider.exec(value);
+            if (matched) {
+                matched[0] = "https://resol.copyrighthub.org?"+ matched[0]  //create url
+            }
+        }
+        console.log(matched)  //print what we found
         if (matched) {
             return matched[0];
         }
