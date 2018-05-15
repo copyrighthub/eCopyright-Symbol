@@ -66,6 +66,17 @@ function getImage(url, callback) {
     }
 }
 
+function httpGetAsync(theUrl, callback)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}
+
 /**
  * Searches all iptc fields and returns hubkey
  * hubkey can be substring of longer field
@@ -74,8 +85,11 @@ function getImage(url, callback) {
  * @return {string} hubkey
  */
 function getHubKey(data) {
+    console.log("data is ", data);
     for (let key in data) {
+        console.log("key: ", key);
         let value = data[key];
+        console.log("value: ", value);
         let matched = hubKeyS1.exec(value);
         if (!matched) {
             matched = hubKeyS0.exec(value);
@@ -93,14 +107,19 @@ function getHubKey(data) {
  * @param {string} img
  */
 function parseImageForIPTC(img){
-    getImage(img.src, function (file) {
-        var data = findInJPEG(file) || {};
-        var hubkey = getHubKey(data);
+    console.log("image source is ", img.src)
+    httpGetAsync("https://0s9l6flpjl.execute-api.eu-west-1.amazonaws.com/stage/imagemeta?url="+img.src, function (file) {
+        // var data = findInJPEG(file) || {};
+        var hubkey = getHubKey(JSON.parse(file));
+        console.log("hubkey is :", hubkey);
         if(hubkey){
             eCopyrightSymbol(hubkey, img);
         }
     });
 }
+
+
+
 
 /*
 IPTC code from exif.js (https://github.com/jseidelin/exif-js).
